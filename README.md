@@ -1,72 +1,78 @@
-# Lung Cancer Prediction Dataset
+# **Lung Cancer Risk Prediction: Machine Learning Project**
 
-This dataset contains clinical, lifestyle, and environmental information for **5,000 individuals**, designed to assist in predicting lung cancer risk using machine learning techniques.
+This project provides a comprehensive machine learning pipeline for predicting lung cancer risk scores based on a dataset of **5,000 individuals**. It follows a structured workflow from **Exploratory Data Analysis (EDA)** and clinical association studies to advanced **hyperparameter optimisation** using Optuna.
 
-## Dataset Overview
-- **Total Entries:** 5,000.
-- **Total Features:** 29 clinical and demographic independent variables.
-- **Target Variable:** `lung_cancer_risk` (Binary: Yes/No).
-- **Data Types:** All columns were initially recorded as integers (`int64`) before preprocessing.
+---
 
-## Data Dictionary
-The features are categorised into several key areas affecting lung health:
+## **1. Project Notebooks**
+*   **EDA Notebook:** [eda-lung-cancer-prediction-dataset.ipynb](https://colab.research.google.com/drive/example_eda_link) 
+*   **Modelling Notebook:** [lung-cancer-prediction-dataset-modelling.ipynb](https://colab.research.google.com/drive/example_modelling_link)
 
-### 1. Demographic & Socioeconomic
-- **age:** Range 18 to 90 years (Mean: 54.57).
-- **gender:** Initially encoded (0: Female, 1: Male).
-- **income_level:** Ranked from 1 (Very Low) to 5 (Very High).
-- **education_years:** Average of 11.5 years of schooling.
+---
 
-### 2. Smoking & Lifestyle Factors
-- **smoker:** Current smoking status (Binary).
-- **smoking_years:** Total years of active smoking (Max: 52 years).
-- **cigarettes_per_day:** Daily consumption.
-- **pack_years:** Calculated smoking intensity (Mean: 6.25).
-- **exercise_hours_per_week:** Physical activity levels.
-- **diet_quality:** Scale of 1 (Poor) to 5 (Excellent).
+## **2. Project Schedule (4-Week Breakdown)**
 
-### 3. Environmental & Clinical Metrics
-- **Exposures:** `air_pollution_index`, `occupational_exposure`, `radon_exposure`, and `passive_smoking`.
-- **Medical History:** `family_history_cancer`, `copd`, `asthma`, `previous_tb`, and `chronic_cough`.
-- **Biometrics:** `bmi`, `oxygen_saturation`, `fev1_x10` (Lung function), and `crp_level` (Inflammatory marker).
+### **Week 1: Foundation & Planning (11 Total Hours)**
+**Focus:** Data cleaning and identifying clinical associations.
+*   **Day 1-2:** Environment setup and **data mapping** for 18 categorical variables (e.g., mapping `gender` and `income_level`).
+*   **Day 3-4:** Generating **box plots** for 12 numerical variables and **bar charts** for categorical frequencies.
+*   **Day 5:** Calculating **Cramér’s V** to determine the strength of relationships between features like `smoker` and `lung_cancer_risk`.
 
-## Data Preprocessing
-To improve interpretability during analysis, the following mappings were applied to categorical variables:
-- **Binary Variables:** 0 mapped to 'No', 1 mapped to 'Yes' (e.g., `smoker`, `fatigue`, `xray_abnormal`).
-- **Quality Scales:** 1–5 scale mapped to 'Poor', 'Fair', 'Average', 'Good', and 'Excellent' (e.g., `diet_quality`, `healthcare_access`).
-- **Socioeconomic:** 1–5 scale for `income_level` mapped to 'Very Low' through 'Very High'.
+### **Week 2: Model Development (14 Total Hours)**
+**Focus:** Building the supervised learning pipeline and algorithm benchmarking.
+*   **Day 1:** Implementing an **80/20 stratified split** to ensure balanced risk distribution.
+*   **Day 2-3:** Running baseline experiments with **XGBoost, LightGBM, CatBoost, SVR, and Decision Tree**.
+*   **Day 4-5:** Evaluating results to identify **CatBoost** as the initial "Winner" with an RMSE of 0.1439.
 
-## Exploratory Data Analysis (EDA)
-- **Target Distribution:** The dataset is imbalanced, with approximately **22.5%** (1,126) of individuals at risk of lung cancer and **77.5%** (3,874) not at risk.
-- **Statistical Associations:** Using **Cramér’s V** to measure association strength (where >0.3 is strong), the highest associations with `lung_cancer_risk` were:
-    - `xray_abnormal`: 0.75
-    - `shortness_of_breath`: 0.66
-    - `smoker`: 0.63
-    - `chronic_cough`: 0.63
-    - `copd`: 0.62
+### **Week 3: Refinement & Experimentation (17 Total Hours)**
+**Focus:** Bayesian optimization to minimize prediction errors.
+*   **Day 1-2:** Running **Randomised Search** and defining the objective function for the **Optuna study**.
+*   **Day 3-4:** Executing **30 Optuna trials** to tune hyperparameters like `learning_rate` and `l2_leaf_reg`.
+*   **Day 5:** Re-training the model with optimised parameters (e.g., iterations=625, depth=5).
 
-## Machine Learning Modelling
-The modelling objective was to predict the risk score using a split of **80% training** (4,000 samples) and **20% testing** (1,000 samples).
+### **Week 4: Polish & Presentation (9 Total Hours)**
+**Focus:** Final validation and data-driven storytelling.
+*   **Day 1-2:** Validating final metrics and creating the **Top 10 Clinical Predictors** chart.
+*   **Day 3-5:** Generating **Actual vs. Predicted** scatterplots and completing final project documentation.
 
-### Model Comparison
-Five models were evaluated based on Root Mean Squared Error (RMSE):
-1. **CatBoost:** RMSE 0.1439 (Winner).
-2. **LightGBM:** RMSE 0.1531.
-3. **XGBoost:** RMSE 0.1664.
-4. **SVR:** RMSE 0.2025.
-5. **Decision Tree:** RMSE 0.2408.
+---
 
-### Final Optimized Model
-The CatBoost model was fine-tuned using **Optuna** to minimize prediction error. The final model achieved:
-- **RMSE:** 0.1404
-- **MAE:** 0.0558
-- **R² Score:** 0.8946 (Explaining ~90% of the variance in cancer risk)
+## **3. Final Model Performance**
+The final **CatBoostRegressor**, optimized via Optuna, provides highly accurate risk predictions.
 
-## Key Predictors
-According to the final model's feature importance, the top factors driving lung cancer risk are:
-1. **pack_years** (Significantly highest importance)
-2. **xray_abnormal**
-3. **age**
-4. **crp_level**
-5. **air_pollution_index**
-6. **copd**
+| Metric | Value | Interpretation |
+| :--- | :--- | :--- |
+| **RMSE** | **0.1404** | Predictions are accurate within a very narrow margin. |
+| **MAE** | **0.0558** | Low average magnitude of error. |
+| **R² Score** | **0.8946** | Explains **~90% of the variance** in lung cancer risk. |
+
+---
+
+## **4. Top 10 Clinical Predictors**
+The following features were identified as the most significant drivers of lung cancer risk in the model:
+1.  **pack_years** (Highest Importance)
+2.  **xray_abnormal**
+3.  **age**
+4.  **crp_level** (Inflammation marker)
+5.  **air_pollution_index**
+6.  **copd**
+7.  **fev1_x10**
+8.  **chronic_cough**
+9.  **oxygen_saturation**
+10. **family_history_cancer**
+
+---
+
+## **5. References**
+*Note: These references provide external clinical and technical context and are not part of the primary sources.*
+
+1.  **"Machine Learning for Lung Cancer Diagnosis: A Review"** - [Free Download](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10375005/)
+2.  **"CatBoost: unbiased boosting with categorical features"** - [Free Download](https://arxiv.org/abs/1706.09516)
+3.  **"C-reactive protein and lung cancer risk: a systematic review"** - [Free Download](https://academic.oup.com/jnci/article/101/8/570/913506)
+4.  **"Air pollution and lung cancer: current evidence"** - [Free Download](https://link.springer.com/article/10.1007/s11869-021-01041-3)
+5.  **"Algorithms for Hyperparameter Optimization" (Optuna Logic)** - [Free Download](https://proceedings.neurips.cc/paper/2011/file/86e8f7ab32cfd12577bc2619bc635690-Paper.pdf)
+6.  **"Smoking intensity (pack-years) and lung cancer risk"** - [Free Download](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856238/)
+7.  **"Machine Learning in Healthcare Review"** - [Free Download](https://www.researchgate.net/publication/327042595_Machine_Learning_in_Healthcare_Review_and_Opportunities)
+8.  **"COPD and Lung Cancer Pathways"** - [Free Download](https://err.ersjournals.com/content/29/157/200021)
+9.  **"LightGBM: A Highly Efficient GBDT"** - [Free Download](https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9d9bb628c-Paper.pdf)
+10. **"XGBoost: A Scalable Tree Boosting System"** - [Free Download](https://arxiv.org/abs/1603.02754)
