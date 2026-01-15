@@ -70,4 +70,3 @@ According to the final model's feature importance, the top factors driving lung 
 4. **crp_level**
 5. **air_pollution_index**
 6. **copd**
-```
