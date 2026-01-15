@@ -62,17 +62,3 @@ The following features were identified as the most significant drivers of lung c
 10. **family_history_cancer**
 
 ---
-
-## **5. References**
-*Note: These references provide external clinical and technical context and are not part of the primary sources.*
-
-1.  **"Machine Learning for Lung Cancer Diagnosis: A Review"** - [Free Download](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10375005/)
-2.  **"CatBoost: unbiased boosting with categorical features"** - [Free Download](https://arxiv.org/abs/1706.09516)
-3.  **"C-reactive protein and lung cancer risk: a systematic review"** - [Free Download](https://academic.oup.com/jnci/article/101/8/570/913506)
-4.  **"Air pollution and lung cancer: current evidence"** - [Free Download](https://link.springer.com/article/10.1007/s11869-021-01041-3)
-5.  **"Algorithms for Hyperparameter Optimization" (Optuna Logic)** - [Free Download](https://proceedings.neurips.cc/paper/2011/file/86e8f7ab32cfd12577bc2619bc635690-Paper.pdf)
-6.  **"Smoking intensity (pack-years) and lung cancer risk"** - [Free Download](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2856238/)
-7.  **"Machine Learning in Healthcare Review"** - [Free Download](https://www.researchgate.net/publication/327042595_Machine_Learning_in_Healthcare_Review_and_Opportunities)
-8.  **"COPD and Lung Cancer Pathways"** - [Free Download](https://err.ersjournals.com/content/29/157/200021)
-9.  **"LightGBM: A Highly Efficient GBDT"** - [Free Download](https://proceedings.neurips.cc/paper/2017/file/6449f44a102fde848669bdd9d9bb628c-Paper.pdf)
-10. **"XGBoost: A Scalable Tree Boosting System"** - [Free Download](https://arxiv.org/abs/1603.02754)
