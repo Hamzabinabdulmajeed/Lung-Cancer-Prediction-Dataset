@@ -1,64 +1,58 @@
-# **Lung Cancer Risk Prediction: Machine Learning Project**
+# **Lung Cancer Risk Prediction: Clinical & Environmental Analysis**
 
-This project provides a comprehensive machine learning pipeline for predicting lung cancer risk scores based on a dataset of **5,000 individuals**. It follows a structured workflow from **Exploratory Data Analysis (EDA)** and clinical association studies to advanced **hyperparameter optimisation** using Optuna.
+This project provides an end-to-end machine learning framework for predicting lung cancer risk scores based on a robust dataset of **5,000 individuals** across **30 clinical and lifestyle features**. The analysis encompasses comprehensive data cleaning, statistical association studies, and high-performance predictive modelling using gradient-boosted decision trees.
 
 ---
 
 ## **1. Project Notebooks**
-*   **EDA Notebook:** [eda-lung-cancer-prediction-dataset.ipynb](https://colab.research.google.com/drive/example_eda_link) 
-*   **Modelling Notebook:** [lung-cancer-prediction-dataset-modelling.ipynb](https://colab.research.google.com/drive/example_modelling_link)
+Access the full code and interactive visualisations via the links below:
+*   **EDA & Statistical Analysis:** [Kaggle: EDA - Lung Cancer Prediction Dataset](https://www.kaggle.com/code/hamzabinbutt/eda-lung-cancer-prediction-dataset)
+*   **Predictive Modelling & Tuning:** [Kaggle: Lung Cancer Prediction - Modelling](https://www.kaggle.com/code/hamzabinbutt/lung-cancer-prediction-dataset-modelling)
 
 ---
 
-## **2. Project Schedule (4-Week Breakdown)**
+## **2. Methodology & Workflow**
 
-### **Week 1: Foundation & Planning (11 Total Hours)**
-**Focus:** Data cleaning and identifying clinical associations.
-*   **Day 1-2:** Environment setup and **data mapping** for 18 categorical variables (e.g., mapping `gender` and `income_level`).
-*   **Day 3-4:** Generating **box plots** for 12 numerical variables and **bar charts** for categorical frequencies.
-*   **Day 5:** Calculating **Cramér’s V** to determine the strength of relationships between features like `smoker` and `lung_cancer_risk`.
+### **Data Engineering & Preprocessing**
+*   **Variable Mapping:** Categorical indicators were mapped from raw numeric codes into clinically meaningful labels for **gender**, **income levels**, and **dietary quality**.
+*   **Dataset Dimensions:** The pipeline processes 29 feature columns, including demographics, clinical markers (e.g., `crp_level`, `fev1_x10`), and environmental factors (`air_pollution_index`, `radon_exposure`).
 
-### **Week 2: Model Development (14 Total Hours)**
-**Focus:** Building the supervised learning pipeline and algorithm benchmarking.
-*   **Day 1:** Implementing an **80/20 stratified split** to ensure balanced risk distribution.
-*   **Day 2-3:** Running baseline experiments with **XGBoost, LightGBM, CatBoost, SVR, and Decision Tree**.
-*   **Day 4-5:** Evaluating results to identify **CatBoost** as the initial "Winner" with an RMSE of 0.1439.
+### **Exploratory Data Analysis (EDA)**
+*   **Statistical Distributions:** Distributional analysis was conducted for **12 numerical variables** using box plots and **18 categorical variables** via frequency bar charts.
+*   **Categorical Association:** **Cramér’s V** was implemented to quantify the strength of the relationship between categorical features and lung cancer risk. Significant associations were identified for `xray_abnormal` (0.75), `shortness_of_breath` (0.66), and `smoker` status (0.63).
 
-### **Week 3: Refinement & Experimentation (17 Total Hours)**
-**Focus:** Bayesian optimization to minimize prediction errors.
-*   **Day 1-2:** Running **Randomised Search** and defining the objective function for the **Optuna study**.
-*   **Day 3-4:** Executing **30 Optuna trials** to tune hyperparameters like `learning_rate` and `l2_leaf_reg`.
-*   **Day 5:** Re-training the model with optimised parameters (e.g., iterations=625, depth=5).
-
-### **Week 4: Polish & Presentation (9 Total Hours)**
-**Focus:** Final validation and data-driven storytelling.
-*   **Day 1-2:** Validating final metrics and creating the **Top 10 Clinical Predictors** chart.
-*   **Day 3-5:** Generating **Actual vs. Predicted** scatterplots and completing final project documentation.
+### **Model Development & Benchmarking**
+*   **Multi-Model Evaluation:** The training pipeline compared five distinct algorithms: **XGBoost, LightGBM, CatBoost, SVR, and Decision Tree Regressors**.
+*   **Algorithm Selection:** **CatBoost** was identified as the champion model, yielding the lowest baseline **RMSE of 0.1439**.
+*   **Bayesian Optimisation:** To further minimise error, an **Optuna study** was conducted over 30 trials to find the ideal hyperparameters, including a learning rate of approximately 0.033 and a model depth of 5.
 
 ---
 
 ## **3. Final Model Performance**
-The final **CatBoostRegressor**, optimized via Optuna, provides highly accurate risk predictions.
+The final, optimised **CatBoost** regressor demonstrated exceptional precision in predicting risk scores, explaining nearly **90% of the variance** in the data.
 
-| Metric | Value | Interpretation |
-| :--- | :--- | :--- |
-| **RMSE** | **0.1404** | Predictions are accurate within a very narrow margin. |
-| **MAE** | **0.0558** | Low average magnitude of error. |
-| **R² Score** | **0.8946** | Explains **~90% of the variance** in lung cancer risk. |
+| Metric | Value |
+| :--- | :--- |
+| **RMSE** (Root Mean Squared Error) | **0.1404** |
+| **MAE** (Mean Absolute Error) | **0.0558** |
+| **R² Score** | **0.8946** |
+
+*Note: The RMSE indicates that, on average, the model's risk predictions are accurate within a very narrow margin.*
+
+---
+
+## **4. Clinical Predictors (Feature Importance)**
+The model identified the following features as the most significant drivers of lung cancer risk:
+1.  **pack_years**: The leading predictor, reflecting cumulative smoking intensity.
+2.  **xray_abnormal**: Presence of radiological anomalies.
+3.  **age**: Biological risk progression.
+4.  **crp_level**: C-reactive protein, a marker of systemic inflammation.
+5.  **air_pollution_index**: Environmental exposure impact.
+6.  **copd**: History of Chronic Obstructive Pulmonary Disease.
 
 ---
 
-## **4. Top 10 Clinical Predictors**
-The following features were identified as the most significant drivers of lung cancer risk in the model:
-1.  **pack_years** (Highest Importance)
-2.  **xray_abnormal**
-3.  **age**
-4.  **crp_level** (Inflammation marker)
-5.  **air_pollution_index**
-6.  **copd**
-7.  **fev1_x10**
-8.  **chronic_cough**
-9.  **oxygen_saturation**
-10. **family_history_cancer**
-
----
+## **5. Project Structure**
+*   **`scipy.stats`**: Utilised for **Cramér's V** association matrix.
+*   **`stratify=y`**: Applied during the **80/20 data split** to ensure balanced target distribution between training and test sets.
+*   **`Matplotlib/Seaborn`**: Used to generate **Top 10 Clinical Predictor** charts and **Actual vs. Predicted** scatterplots to validate model reliability.
