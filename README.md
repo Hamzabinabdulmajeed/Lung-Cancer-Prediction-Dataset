@@ -51,8 +51,3 @@ The model identified the following features as the most significant drivers of l
 6.  **copd**: History of Chronic Obstructive Pulmonary Disease.
 
 ---
-
-## **5. Project Structure**
-*   **`scipy.stats`**: Utilised for **Cramér's V** association matrix.
-*   **`stratify=y`**: Applied during the **80/20 data split** to ensure balanced target distribution between training and test sets.
-*   **`Matplotlib/Seaborn`**: Used to generate **Top 10 Clinical Predictor** charts and **Actual vs. Predicted** scatterplots to validate model reliability.
