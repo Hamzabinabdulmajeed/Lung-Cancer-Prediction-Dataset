@@ -1,4 +1,3 @@
-```markdown
 # Lung Cancer Prediction Dataset
 
 This dataset contains clinical, lifestyle, and environmental information for **5,000 individuals**, designed to assist in predicting lung cancer risk using machine learning techniques.
